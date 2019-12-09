@@ -20,7 +20,7 @@ class Character(models.Model):
     hair_Color = models.CharField(max_length=16, null=True, blank=True)
     eye_Color = models.CharField(max_length=16, null=True, blank=True)
     height = models.CharField(
-        max_length=6, null=True, blank=True, 
+        max_length=6, null=True, blank=True,
         help_text='Height typically in feet')
     weight = models.IntegerField(
         validators=[MinValueValidator(1)],
@@ -105,9 +105,21 @@ class BaseClass(models.Model):
     class_name = models.CharField(max_length=20)
     hit_die = models.IntegerField(choices=HIT_DIE_CHOICES, default=4)
     class_skills = models.ManyToManyField('Skill', related_name='+')
+    skill_points = models.IntegerField(
+        validators=[MinValueValidator(2)], default=2)
+    class_abilities = models.ManyToManyField(
+        'ClassAbility')
 
     def __str__(self):
         return self.class_name
+
+
+class ClassAbility(models.Model):
+    name = models.CharField(max_length=50, blank=True)
+    description = models.TextField(max_length=1000)
+
+    def __str__(self):
+        return self.name
 
 
 class CharacterClass(models.Model):
