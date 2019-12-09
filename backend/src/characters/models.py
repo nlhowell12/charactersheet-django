@@ -5,13 +5,18 @@ from characters.character_choices import (
 from characters.class_choices import (HIT_DIE_CHOICES)
 from characters.equipment_choices import (SPELL_FAILURE_CHANCES)
 from characters.bonuses import (BONUS_TYPES)
+from django.contrib.auth.models import User
 
 
 class Character(models.Model):
+    player = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name='player')
+    DM = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name='DM')
     character_Name = models.CharField(max_length=50)
     race = models.ForeignKey('Race', on_delete=models.SET_NULL, null=True)
-    character_classes = models.ManyToManyField(
-        'CharacterClass', related_name='character')
+    character_Classes = models.ManyToManyField(
+        'CharacterClass', related_name='character_class')
     hair_Color = models.CharField(max_length=16, null=True, blank=True)
     eye_Color = models.CharField(max_length=16, null=True, blank=True)
     height = models.CharField(
@@ -53,12 +58,12 @@ class Character(models.Model):
     sex = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(3)],
         choices=SEX_CHOICES, default=0, null=False, blank=False)
-    alignment = models.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(9)],
-        choices=ALIGNMENT_CHOICES, default=0, null=False, blank=False)
-    zodiac_Sign = models.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(11)],
-        choices=ZODIAC_CHOICES, default=0, null=True, blank=True)
+    alignment = models.CharField(
+        choices=ALIGNMENT_CHOICES, default='LG', null=False, blank=False,
+        max_length=2)
+    zodiac_Sign = models.CharField(
+        choices=ZODIAC_CHOICES, default=0, null=False, blank=False,
+        max_length=20)
     skills = models.ManyToManyField(
         'CharacterSkill', related_name='+', blank=True)
     feats = models.ManyToManyField(
@@ -84,7 +89,7 @@ class Race(models.Model):
 
 class Subrace(models.Model):
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
-    subrace_name = models.CharField(max_length=15)
+    subrace_name = models.CharField(max_length=30)
     attribute_bonus = models.ManyToManyField(
       'AttributeBonus', related_name='+')
     skill_bonuses = models.ManyToManyField(
@@ -105,8 +110,13 @@ class BaseClass(models.Model):
         return self.class_name
 
 
-class CharacterClass(BaseClass):
-    level = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+class CharacterClass(models.Model):
+    base_class = models.ForeignKey(
+        BaseClass, on_delete=models.CASCADE, null=True)
+    level = models.IntegerField(validators=[MinValueValidator(0)])
+
+    def __str__(self):
+        return '{} {}'.format(self.base_class.class_name, self.level)
 
 
 class Skill(models.Model):
@@ -118,13 +128,18 @@ class Skill(models.Model):
         return self.skill_name
 
 
-class CharacterSkill(Skill):
+class CharacterSkill(models.Model):
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     rank = models.IntegerField(validators=[MinValueValidator(0)])
+
+    def __str__(self):
+        return self.skill.skill_name
 
 
 class Feat(models.Model):
     feat_name = models.CharField(max_length=50)
-    description = models.TextField(max_length=1000)
+    benefit = models.TextField(max_length=1000)
+    prerequisites = models.TextField(max_length=1000)
     skill_bonuses = models.ManyToManyField(
         'SkillBonus', related_name='+')
     attribute_bonuses = models.ManyToManyField(

@@ -7,8 +7,9 @@ class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = (
-            'id', 'character_Name', 'race', 'character_Classes',
-            'hair_Color', 'eye_Color', 'height', 'weight', 'age',
+            'id', 'player', 'DM', 'character_Name', 'race',
+            'character_Classes', 'hair_Color', 'eye_Color',
+            'height', 'weight', 'age',
             'max_HP', 'current_HP', 'base_Strength', 'base_Dexterity',
             'base_Constitution', 'base_Intelligence', 'base_Wisdom',
             'base_Charisma', 'personal_Traits', 'ideals',

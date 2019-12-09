@@ -1,34 +1,34 @@
 ALIGNMENT_CHOICES = (
-    (0, 'Lawful Good'),
-    (1, 'Neutral Good'),
-    (2, 'Chaotic Good'),
-    (3, 'Lawful Neutral'),
-    (4, 'True Neutral'),
-    (5, 'Chaotic Neutral'),
-    (6, 'Lawful Evil'),
-    (7, 'Neutral Evil'),
-    (8, 'Chaotic Evil'),
+    ('LG', 'Lawful Good'),
+    ('NG', 'Neutral Good'),
+    ('CG', 'Chaotic Good'),
+    ('LN', 'Lawful Neutral'),
+    ('N', 'True Neutral'),
+    ('CN', 'Chaotic Neutral'),
+    ('LE', 'Lawful Evil'),
+    ('NE', 'Neutral Evil'),
+    ('CE', 'Chaotic Evil'),
 )
 
 SEX_CHOICES = (
-    (0, 'Male'),
-    (1, 'Female'),
-    (2, 'Other'),
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+    ('Other', 'Other'),
 )
 
 ZODIAC_CHOICES = (
-    (0, 'Aries'),
-    (1, 'Leo'),
-    (2, 'Cancer'),
-    (3, 'Pisces'),
-    (4, 'Scorpio'),
-    (5, 'Taurus'),
-    (6, 'Sagittarius'),
-    (7, 'Gemini'),
-    (8, 'Virgo'),
-    (9, 'Libra'),
-    (10, 'Capricorn'),
-    (11, 'Aquarius'),
+    ('Aries', 'Aries'),
+    ('Leo', 'Leo'),
+    ('Cancer', 'Cancer'),
+    ('Pisces', 'Pisces'),
+    ('Scorpio', 'Scorpio'),
+    ('Taurus', 'Taurus'),
+    ('Sagittarius', 'Sagittarius'),
+    ('Gemini', 'Gemini'),
+    ('Virgo', 'Virgo'),
+    ('Libra', 'Libra'),
+    ('Caricorn', 'Capricorn'),
+    ('Aquarius', 'Aquarius'),
 )
 
 ATTRIBUTE_CHOICES = (
