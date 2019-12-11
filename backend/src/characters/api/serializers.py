@@ -44,7 +44,7 @@ class BaseClassSerializer(serializers.ModelSerializer):
         model = BaseClass
         fields = [
             'hit_die', 'class_skills', 'skill_points',
-            'class_abilities'
+            'class_abilities', 'fort', 'reflex', 'will'
         ]
 
 

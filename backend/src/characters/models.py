@@ -79,8 +79,8 @@ class Character(models.Model):
 
 class Race(models.Model):
     racial_name = models.CharField(max_length=15)
-    attribute_bonuses = models.CharField(max_length=50)
-    skill_bonuses = models.CharField(max_length=50)
+    attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
+    skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField()
     special_abilities = models.TextField()
     playable = models.BooleanField(default=True)
@@ -90,10 +90,13 @@ class Race(models.Model):
 
 
 class Subrace(models.Model):
+    class Meta:
+        verbose_name_plural = 'Sub-Races'
+
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
     subrace_name = models.CharField(max_length=30)
-    attribute_bonuses = models.CharField(max_length=50)
-    skill_bonuses = models.CharField(max_length=50)
+    attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
+    skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField()
     special_abilities = models.TextField()
 
@@ -102,6 +105,9 @@ class Subrace(models.Model):
 
 
 class BaseClass(models.Model):
+    class Meta:
+        verbose_name_plural = 'Classes'
+
     class_name = models.CharField(max_length=20)
     hit_die = models.IntegerField(choices=HIT_DIE_CHOICES, default=4)
     class_skills = models.ManyToManyField('Skill', related_name='+')
@@ -124,6 +130,9 @@ class BaseClass(models.Model):
 
 
 class ClassAbility(models.Model):
+    class Meta:
+        verbose_name_plural = 'Class Abilities'
+
     name = models.CharField(max_length=50, blank=True)
     description = models.TextField(max_length=1000)
 
@@ -132,6 +141,9 @@ class ClassAbility(models.Model):
 
 
 class CharacterClass(models.Model):
+    class Meta:
+        verbose_name_plural = 'Character Classes'
+
     base_class = models.ForeignKey(
         BaseClass, on_delete=models.CASCADE, null=True)
     level = models.IntegerField(validators=[MinValueValidator(1)])
@@ -161,16 +173,17 @@ class Feat(models.Model):
     feat_name = models.CharField(max_length=50)
     benefit = models.TextField(max_length=1000)
     prerequisites = models.TextField(max_length=1000)
-    skill_bonuses = models.ManyToManyField(
-        'SkillBonus', related_name='+')
-    attribute_bonuses = models.ManyToManyField(
-        'AttributeBonus', related_name='+')
+    attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
+    skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.feat_name
 
 
 class Equipment(models.Model):
+    class Meta:
+        verbose_name_plural = 'Equipment'
+
     item_name = models.CharField(max_length=50)
     weight = models.IntegerField()
     description = models.TextField(max_length=1000)
@@ -191,6 +204,9 @@ class Weapon(Equipment):
 
 
 class Armor(Equipment):
+    class Meta:
+        verbose_name_plural = 'Armor'
+
     armor_bonus = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(8)])
     bonus_type = models.CharField(
