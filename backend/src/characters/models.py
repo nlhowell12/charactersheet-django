@@ -3,7 +3,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from characters.character_choices import (
     ALIGNMENT_CHOICES, SEX_CHOICES, ZODIAC_CHOICES, ATTRIBUTE_CHOICES)
 from characters.class_choices import (HIT_DIE_CHOICES)
-from characters.equipment_choices import (SPELL_FAILURE_CHANCES)
+from characters.equipment_choices import (
+    SPELL_FAILURE_CHANCES, BODY_SLOT_CHOICES
+    )
 from characters.bonuses import (BONUS_TYPES)
 from django.contrib.auth.models import User
 
@@ -81,7 +83,7 @@ class Race(models.Model):
       'SkillBonus', related_name='+')
     description = models.TextField()
     special_abilities = models.TextField()
-    non_playable = models.BooleanField(default=False)
+    playable = models.BooleanField(default=False)
 
     def __str__(self):
         return self.racial_name
@@ -90,7 +92,7 @@ class Race(models.Model):
 class Subrace(models.Model):
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
     subrace_name = models.CharField(max_length=30)
-    attribute_bonus = models.ManyToManyField(
+    attribute_bonuses = models.ManyToManyField(
       'AttributeBonus', related_name='+')
     skill_bonuses = models.ManyToManyField(
        'SkillBonus', related_name='+')
@@ -165,7 +167,11 @@ class Equipment(models.Model):
     item_name = models.CharField(max_length=50)
     weight = models.IntegerField()
     description = models.TextField(max_length=1000)
-
+    body_slot = models.CharField(
+        max_length=10, choices=BODY_SLOT_CHOICES,
+        blank=True, null=True
+        )
+    
     def __str__(self):
         return self.item_name
 

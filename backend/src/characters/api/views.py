@@ -1,7 +1,11 @@
 from rest_framework import viewsets
 
-from characters.models import Character
-from .serializers import CharacterSerializer
+from characters.models import (
+    Character, Equipment
+    )
+from .serializers import (
+    CharacterSerializer, EquipmentSerializer
+    )
 
 
 class CharacterViewSet(viewsets.ModelViewSet):
@@ -40,3 +44,8 @@ class CharacterViewSet(viewsets.ModelViewSet):
 # class CharacterDeleteView(DestroyAPIView):
 #     queryset = Character.objects.all()
 #     serializer_class = CharacterSerializer
+
+
+class EquipmentViewset(viewsets.ModelViewSet):
+    serializer_class = EquipmentSerializer
+    queryset = Equipment.objects.all()

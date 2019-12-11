@@ -39,3 +39,7 @@ ATTRIBUTE_CHOICES = (
     ('wisdom', 'Wisdom'),
     ('charisma', 'Charisma')
 )
+
+SKILLS = {
+    
+}

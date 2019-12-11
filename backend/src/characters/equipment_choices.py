@@ -10,3 +10,19 @@ SPELL_FAILURE_CHANCES = (
     (40, '40%'),
     (50, '50%')
     )
+
+BODY_SLOT_CHOICES = (
+    ('Head', 'Head'),
+    ('Face', 'Face'),
+    ('Torso', 'Torso'),
+    ('Back', 'Back'),
+    ('Throat', 'Throat'),
+    ('Arm', 'Arm'),
+    ('Hand', 'Hand'),
+    ('Ring', 'Ring'),
+    ('Body', 'Body'),
+    ('Waist', 'Waist'),
+    ('Legs', 'Legs'),
+    ('Main Hand', 'Main Hand'),
+    ('Off Hand', 'Off Hand'),
+)
