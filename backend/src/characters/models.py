@@ -134,7 +134,7 @@ class ClassAbility(models.Model):
 class CharacterClass(models.Model):
     base_class = models.ForeignKey(
         BaseClass, on_delete=models.CASCADE, null=True)
-    level = models.IntegerField(validators=[MinValueValidator(0)])
+    level = models.IntegerField(validators=[MinValueValidator(1)])
 
     def __str__(self):
         return '{} {}'.format(self.base_class.class_name, self.level)
@@ -142,7 +142,7 @@ class CharacterClass(models.Model):
 
 class Skill(models.Model):
     skill_name = models.CharField(max_length=50)
-    synergies = models.ManyToManyField('self', related_name='+', blank=True)
+    synergies = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(max_length=1500)
 
     def __str__(self):
