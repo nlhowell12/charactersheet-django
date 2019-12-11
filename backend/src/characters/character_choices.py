@@ -41,5 +41,5 @@ ATTRIBUTE_CHOICES = (
 )
 
 SKILLS = {
-    
+
 }

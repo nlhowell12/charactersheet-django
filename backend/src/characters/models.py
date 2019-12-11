@@ -171,7 +171,7 @@ class Equipment(models.Model):
         max_length=10, choices=BODY_SLOT_CHOICES,
         blank=True, null=True
         )
-    
+
     def __str__(self):
         return self.item_name
 
