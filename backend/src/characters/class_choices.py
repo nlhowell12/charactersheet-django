@@ -5,3 +5,8 @@ HIT_DIE_CHOICES = (
     (10, 'd10'),
     (12, 'd12')
 )
+
+SAVE_CHOICES = (
+    ('Good', 'Good'),
+    ('Poor', 'Poor')
+    )

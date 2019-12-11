@@ -1,8 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from characters.character_choices import (
-    ALIGNMENT_CHOICES, SEX_CHOICES, ZODIAC_CHOICES, ATTRIBUTE_CHOICES)
-from characters.class_choices import (HIT_DIE_CHOICES)
+    ALIGNMENT_CHOICES, SEX_CHOICES, ZODIAC_CHOICES)
+from characters.class_choices import (
+    HIT_DIE_CHOICES, SAVE_CHOICES
+    )
 from characters.equipment_choices import (
     SPELL_FAILURE_CHANCES, BODY_SLOT_CHOICES
     )
@@ -77,13 +79,11 @@ class Character(models.Model):
 
 class Race(models.Model):
     racial_name = models.CharField(max_length=15)
-    attribute_bonuses = models.ManyToManyField(
-      'AttributeBonus', related_name='+')
-    skill_bonuses = models.ManyToManyField(
-      'SkillBonus', related_name='+')
+    attribute_bonuses = models.CharField(max_length=50)
+    skill_bonuses = models.CharField(max_length=50)
     description = models.TextField()
     special_abilities = models.TextField()
-    playable = models.BooleanField(default=False)
+    playable = models.BooleanField(default=True)
 
     def __str__(self):
         return self.racial_name
@@ -92,10 +92,8 @@ class Race(models.Model):
 class Subrace(models.Model):
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
     subrace_name = models.CharField(max_length=30)
-    attribute_bonuses = models.ManyToManyField(
-      'AttributeBonus', related_name='+')
-    skill_bonuses = models.ManyToManyField(
-       'SkillBonus', related_name='+')
+    attribute_bonuses = models.CharField(max_length=50)
+    skill_bonuses = models.CharField(max_length=50)
     description = models.TextField()
     special_abilities = models.TextField()
 
@@ -111,6 +109,15 @@ class BaseClass(models.Model):
         validators=[MinValueValidator(2)], default=2)
     class_abilities = models.ManyToManyField(
         'ClassAbility')
+    fort = models.CharField(
+        max_length=4, choices=SAVE_CHOICES, default='Poor'
+        )
+    reflex = models.CharField(
+        max_length=4, choices=SAVE_CHOICES, default='Poor'
+        )
+    will = models.CharField(
+        max_length=4, choices=SAVE_CHOICES, default='Poor'
+        )
 
     def __str__(self):
         return self.class_name
@@ -196,29 +203,3 @@ class Armor(Equipment):
         default=0)
     spell_failure_chance = models.IntegerField(
         choices=SPELL_FAILURE_CHANCES, default=0)
-
-
-class AttributeBonus(models.Model):
-    attribute = models.CharField(
-        choices=ATTRIBUTE_CHOICES, default='strength',
-        null=False, blank=False, max_length=20)
-    bonus = models.IntegerField()
-    bonus_type = models.CharField(
-        choices=BONUS_TYPES, default='untyped', max_length=10)
-
-    def __str__(self):
-        return '{type}: {attribute} +{bonus}'.format(
-            type=self.bonus_type, attribute=self.attribute,
-            bonus=self.bonus)
-
-
-class SkillBonus(models.Model):
-    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
-    bonus = models.IntegerField()
-    bonus_type = models.CharField(
-        choices=BONUS_TYPES, default='untyped', max_length=10)
-
-    def __str__(self):
-        return '{type}: {skill} +{bonus}'.format(
-            type=self.bonus_type, skill=self.skill.skill_name,
-            bonus=self.bonus)
