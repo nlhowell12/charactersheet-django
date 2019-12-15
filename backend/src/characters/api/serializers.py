@@ -2,8 +2,11 @@ from rest_framework import serializers
 
 from characters.models import (
     Character, Race, Subrace, BaseClass,
-    Skill, Feat, Equipment
+    Skill, Feat
     )
+from equipment.models import (
+    Equipment
+)
 
 
 class CharacterSerializer(serializers.ModelSerializer):

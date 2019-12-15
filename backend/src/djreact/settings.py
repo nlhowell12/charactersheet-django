@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'characters',
-    'spells'
+    'spells',
+    'equipment'
 ]
 
 MIDDLEWARE = [

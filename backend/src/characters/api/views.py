@@ -1,8 +1,11 @@
 from rest_framework import viewsets
 
 from characters.models import (
-    Character, Equipment
+    Character
     )
+from equipment.models import (
+    Equipment
+)
 from .serializers import (
     CharacterSerializer, EquipmentSerializer
     )
