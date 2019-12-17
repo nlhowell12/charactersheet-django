@@ -1,11 +1,18 @@
 from characters.api.views import (
-    CharacterViewSet, EquipmentViewset
+    CharacterViewSet
     )
+from equipment.views import (
+    EquipmentViewset
+)
+from spells.views import (
+    SpellViewset
+)
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'characters', CharacterViewSet, base_name='characters')
 router.register(r'equipment', EquipmentViewset, base_name='equipment')
+router.register(r'spells', SpellViewset, base_name='spells')
 urlpatterns = router.urls
 
 # from django.urls import path

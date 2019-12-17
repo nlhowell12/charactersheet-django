@@ -45,4 +45,3 @@ class Armor(Equipment):
         default=0)
     spell_failure_chance = models.IntegerField(
         choices=SPELL_FAILURE_CHANCES, default=0)
-

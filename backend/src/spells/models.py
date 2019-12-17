@@ -29,6 +29,10 @@ class Song(Spell):
     chord = models.CharField(max_length=20)
 
 
+class Arcane(Spell):
+    school = models.CharField(max_length=20)
+
+
 class Prayer(Spell):
     domain = models.CharField(max_length=20)
 
@@ -90,7 +94,7 @@ class Invocation(models.Model):
         return '{} - {}'.format(self.pact, self.grade)
 
 
-class PactInvocation(models.Model):
+class PactInvocation(Invocation):
     pact = models.CharField(max_length=100)
 
 
