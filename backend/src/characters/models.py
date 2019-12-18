@@ -106,11 +106,12 @@ class BaseClass(models.Model):
 
     class_name = models.CharField(max_length=20)
     hit_die = models.IntegerField(choices=HIT_DIE_CHOICES, default=4)
-    class_skills = models.ManyToManyField('Skill', related_name='+')
+    class_skills = models.ManyToManyField(
+        'Skill', related_name='+', blank=True)
     skill_points = models.IntegerField(
         validators=[MinValueValidator(2)], default=2)
     class_abilities = models.ManyToManyField(
-        'ClassAbility')
+        'ClassAbility', blank=True)
     fort = models.CharField(
         max_length=4, choices=SAVE_CHOICES, default='Poor'
         )
@@ -166,11 +167,14 @@ class CharacterSkill(models.Model):
 
 
 class Feat(models.Model):
+    class Meta:
+        ordering = ['feat_classification', 'feat_name']
     feat_name = models.CharField(max_length=50)
+    feat_classification = models.CharField(max_length=50, blank=True)
     benefit = models.TextField(max_length=1000)
     prerequisites = models.TextField(max_length=1000)
     attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
     skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.feat_name
+        return '{} - {}'.format(self.feat_classification, self.feat_name)

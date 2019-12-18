@@ -17,7 +17,7 @@ class Spell(models.Model):
     spell_range = models.CharField(max_length=50)
     duration = models.CharField(max_length=50)
     save = models.CharField(max_length=50, null=True, blank=True)
-    bonus_tyoe = models.CharField(max_length=50)
+    bonus_type = models.CharField(max_length=50, null=True, blank=True)
     damage_type = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField(max_length=1000)
 
