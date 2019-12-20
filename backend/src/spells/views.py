@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from xlrd import open_workbook
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from spells.models import (
@@ -7,11 +6,8 @@ from spells.models import (
     Chant, Power, DisciplinePower,
     Vestige, MartialManeuver, Invocation,
     PactInvocation, Mystery
-
 )
-from .serializers import (
-    SpellSerializer
-    )
+
 from spells.utils import populate_spell_data
 
 
@@ -29,4 +25,9 @@ class SpellViewset(viewsets.ViewSet):
             return Response({
                 'status': False,
                 'error': 'File Not Found'
+            })
+        except TypeError:
+            return Response({
+                'status': False,
+                'error': 'Database write error'
             })

@@ -8,12 +8,19 @@ from characters.models import BaseClass
 from xlrd import open_workbook
 
 
+def spell_model(class_name):
+    switcher = {
+        'Bard': Song
+    }
+    return switcher[class_name]
+
+
 def create_spell_model(class_name, data):
     associated_class = BaseClass.objects.filter(
         class_name=class_name).first()
 
     if class_name == 'Bard':
-        Song.objects.create(
+        spell_model(class_name).objects.create(
             chord=data[2].value,
             name=data[1].value,
             class_spell_list=associated_class,
@@ -22,7 +29,7 @@ def create_spell_model(class_name, data):
             casting_time=data[4].value,
             spell_range=data[5].value,
             duration=data[6].value,
-            save=data[7].value,
+            spell_save=data[7].value,
             bonus_type=data[8].value,
             damage_type=data[9].value,
             description=data[10].value
