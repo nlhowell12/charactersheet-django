@@ -6,23 +6,28 @@ from characters.models import BaseClass
 class Spell(models.Model):
     class Meta:
         ordering = ['level', 'name']
+        abstract = True
 
     name = models.CharField(max_length=50)
     level = models.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(10)])
+        validators=[MinValueValidator(0), MaxValueValidator(10)],
+        default=0)
     class_spell_list = models.ForeignKey(
-        BaseClass, on_delete=models.CASCADE, related_name='class_list')
-    descriptors = models.CharField(max_length=50)
-    casting_time = models.CharField(max_length=50)
-    spell_range = models.CharField(max_length=50)
-    duration = models.CharField(max_length=50)
+        BaseClass, on_delete=models.CASCADE, null=True)
+    descriptors = models.CharField(max_length=50, blank=True)
+    casting_time = models.CharField(max_length=50, default="Standard Action")
+    spell_range = models.CharField(max_length=50, default='Short')
+    area = models.CharField(max_length=50, null=True, blank=True)
+    duration = models.CharField(max_length=50, default='Instantaneous')
     save = models.CharField(max_length=50, null=True, blank=True)
     bonus_type = models.CharField(max_length=50, null=True, blank=True)
     damage_type = models.CharField(max_length=50, null=True, blank=True)
-    description = models.TextField(max_length=1000)
+    description = models.TextField(max_length=1000, blank=True)
+    spell_resistance = models.BooleanField(default=True)
+    components = models.CharField(max_length=20, default='V, S, M')
 
     def __str__(self):
-        return '{} - {}'.format(self.level, self.name)
+        return f'{self.level} - {self.name}'
 
 
 class Song(Spell):
@@ -99,6 +104,9 @@ class PactInvocation(Invocation):
 
 
 class Mystery(models.Model):
+    class Meta:
+        verbose_name_plural = 'Mysteries'
+
     name = models.CharField(max_length=50)
     mystery_rank = models.CharField(max_length=50)
     path = models.CharField(max_length=50)
@@ -111,3 +119,8 @@ class Mystery(models.Model):
     def __str__(self):
         return '{} - {}. {}'.format(
             self.mystery_rank, self.path_level, self.name)
+
+
+class Epic(Spell):
+    spellcraft_DC = models.IntegerField(validators=[MinValueValidator(0)])
+    to_develop = models.TextField(max_length=1000, blank=True)

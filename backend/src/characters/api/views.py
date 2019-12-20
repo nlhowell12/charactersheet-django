@@ -34,5 +34,5 @@ class CharacterViewSet(viewsets.ModelViewSet):
         except FileNotFoundError:
             return Response({
                 'error': 'File Not Found',
-                'status': 'Upload failed'
+                'status': False
             })

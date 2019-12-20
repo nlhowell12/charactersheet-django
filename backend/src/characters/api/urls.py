@@ -10,9 +10,9 @@ from spells.views import (
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'characters', CharacterViewSet, base_name='characters')
-router.register(r'equipment', EquipmentViewset, base_name='equipment')
-router.register(r'spells', SpellViewset, base_name='spells')
+router.register(r'characters', CharacterViewSet, basename='characters')
+router.register(r'equipment', EquipmentViewset, basename='equipment')
+router.register(r'spells', SpellViewset, basename='spells')
 urlpatterns = router.urls
 
 # from django.urls import path

@@ -1,12 +1,11 @@
 from django.contrib import admin
 from .models import (
-    Spell, Song, Prayer, Chant, Power,
+    Song, Prayer, Chant, Power,
     DisciplinePower, Vestige,
     MartialManeuver, Invocation,
     PactInvocation, Mystery
     )
 
-admin.site.register(Spell)
 admin.site.register(Song)
 admin.site.register(Prayer)
 admin.site.register(Chant)
