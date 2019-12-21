@@ -1,12 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from spells.models import (
-    Spell, Song, Arcane, Prayer,
-    Chant, Power, DisciplinePower,
-    Vestige, MartialManeuver, Invocation,
-    PactInvocation, Mystery
-)
 
 from spells.utils import populate_spell_data
 
@@ -26,13 +20,13 @@ class SpellViewset(viewsets.ViewSet):
                 'status': False,
                 'error': 'File Not Found'
             })
-        # except TypeError:
-        #     return Response({
-        #         'status': False,
-        #         'error': 'Database write error'
-        #     })
-        # except KeyError:
-        #     return Response({
-        #         'status': False,
-        #         'error': 'KeyError, check dict'
-        #     })
+        except TypeError:
+            return Response({
+                'status': False,
+                'error': 'Database write error'
+            })
+        except KeyError:
+            return Response({
+                'status': False,
+                'error': 'KeyError, check dict'
+            })

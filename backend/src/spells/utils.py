@@ -1,8 +1,8 @@
 from spells.models import (
-    Song, Arcane, Prayer,
-    Chant, Power, DisciplinePower,
+    Song, Wizard, Hexblade, Prayer,
+    Chant, Psion, PsychicWarrior, DisciplinePower,
     Vestige, MartialManeuver, Invocation,
-    PactInvocation, Mystery
+    PactInvocation, Mystery, Oathsworn
 )
 from characters.models import BaseClass
 from xlrd import open_workbook
@@ -13,11 +13,11 @@ def spell_model(class_name):
         'Bard': Song,
         'Cleric': Prayer,
         'Druid': Chant,
-        'Hexblade': Arcane,
-        'Oathsworn': Prayer,
-        'Psion': Power,
-        'Sorcerer - Wizard': Arcane,
-        'Psychic Warrior': Power
+        'Hexblade': Hexblade,
+        'Oathsworn': Oathsworn,
+        'Psion': Psion,
+        'Sorcerer - Wizard': Wizard,
+        'Psychic Warrior': PsychicWarrior
     }
     return switcher[class_name]
 
@@ -58,7 +58,25 @@ def create_spell_model(class_name, data):
         )
 
 
+def clear_spell_data():
+    Song.objects.all().delete()
+    Wizard.objects.all().delete()
+    Hexblade.objects.all().delete()
+    Prayer.objects.all().delete()
+    Chant.objects.all().delete()
+    Psion.objects.all().delete()
+    PsychicWarrior.objects.all().delete()
+    DisciplinePower.objects.all().delete()
+    Vestige.objects.all().delete()
+    MartialManeuver.objects.all().delete()
+    Invocation.objects.all().delete()
+    PactInvocation.objects.all().delete()
+    Mystery.objects.all().delete()
+    Oathsworn.objects.all().delete()
+
+
 def populate_spell_data(file_location):
+    clear_spell_data()
     book = open_workbook(file_location)
     sheets = book.sheets()
     spell_casting_classes = [

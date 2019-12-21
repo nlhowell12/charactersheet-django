@@ -34,7 +34,11 @@ class Song(Spell):
     chord = models.CharField(max_length=20)
 
 
-class Arcane(Spell):
+class Wizard(Spell):
+    school = models.CharField(max_length=20)
+
+
+class Hexblade(Spell):
     school = models.CharField(max_length=20)
 
 
@@ -46,11 +50,19 @@ class Chant(Spell):
     sphere = models.CharField(max_length=20)
 
 
-class Power(Spell):
+class Oathsworn(Spell):
+    domain = models.CharField(max_length=20)
+
+
+class Psion(Spell):
     discipline = models.CharField(max_length=20)
 
 
-class DisciplinePower(Power):
+class PsychicWarrior(Spell):
+    discipline = models.CharField(max_length=20)
+
+
+class DisciplinePower(Psion):
     discipline_list = models.CharField(max_length=15)
 
 
