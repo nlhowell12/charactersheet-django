@@ -75,7 +75,7 @@ class Vestige(models.Model):
 
 class MartialManeuver(models.Model):
     class Meta:
-        ordering = ['level', 'name']
+        ordering = ['style', 'level', 'name']
 
     name = models.CharField(max_length=50)
     style = models.CharField(max_length=50)
@@ -84,19 +84,23 @@ class MartialManeuver(models.Model):
     description = models.TextField(max_length=1000)
 
     def __str__(self):
-        return '{} - {}'.format(self.level, self.name)
+        return f'{self.style} - {self.level} - {self.name}'
 
 
 class Invocation(models.Model):
+    class Meta:
+        ordering = ['grade', 'level_equivalent', 'name']
+
+    grade = models.CharField(max_length=50, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     level_equivalent = models.CharField(max_length=100, null=True, blank=True)
     invocation_type = models.CharField(max_length=100, null=True, blank=True)
     duration = models.CharField(max_length=100, null=True, blank=True)
-    save = models.CharField(max_length=100, null=True, blank=True)
+    invocation_save = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return '{} - {}'.format(self.pact, self.grade)
+        return f'{self.pact} - {self.grade} - {self.name}'
 
 
 class PactInvocation(Invocation):
@@ -106,19 +110,18 @@ class PactInvocation(Invocation):
 class Mystery(models.Model):
     class Meta:
         verbose_name_plural = 'Mysteries'
+        ordering = ['mystery_rank', 'path']
 
     name = models.CharField(max_length=50)
     mystery_rank = models.CharField(max_length=50)
     path = models.CharField(max_length=50)
-    path_level = models.IntegerField()
     mystery_range = models.CharField(max_length=50)
     duration = models.CharField(max_length=50)
-    save = models.CharField(max_length=50, null=True, blank=True)
+    mystery_save = models.CharField(max_length=50, null=True, blank=True)
     description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return '{} - {}. {}'.format(
-            self.mystery_rank, self.path_level, self.name)
+        return f'{self.mystery_rank} - {self.path_level}. {self.name}'
 
 
 class Epic(Spell):

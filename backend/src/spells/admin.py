@@ -3,7 +3,7 @@ from .models import (
     Song, Prayer, Chant, Power,
     DisciplinePower, Vestige,
     MartialManeuver, Invocation,
-    PactInvocation, Mystery
+    PactInvocation, Mystery, Arcane
     )
 
 admin.site.register(Song)
@@ -16,3 +16,4 @@ admin.site.register(MartialManeuver)
 admin.site.register(Invocation)
 admin.site.register(PactInvocation)
 admin.site.register(Mystery)
+admin.site.register(Arcane)

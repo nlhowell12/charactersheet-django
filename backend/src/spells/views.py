@@ -26,8 +26,13 @@ class SpellViewset(viewsets.ViewSet):
                 'status': False,
                 'error': 'File Not Found'
             })
-        except TypeError:
-            return Response({
-                'status': False,
-                'error': 'Database write error'
-            })
+        # except TypeError:
+        #     return Response({
+        #         'status': False,
+        #         'error': 'Database write error'
+        #     })
+        # except KeyError:
+        #     return Response({
+        #         'status': False,
+        #         'error': 'KeyError, check dict'
+        #     })
