@@ -75,9 +75,9 @@ def clear_spell_data():
     Oathsworn.objects.all().delete()
 
 
-def populate_spell_data(file_location):
+def populate_spell_data(file):
     clear_spell_data()
-    book = open_workbook(file_location)
+    book = open_workbook(file_contents=file.read())
     sheets = book.sheets()
     spell_casting_classes = [
         'Bard', 'Cleric', 'Druid', 'Hexblade',

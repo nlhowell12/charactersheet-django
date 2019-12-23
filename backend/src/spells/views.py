@@ -13,7 +13,8 @@ class SpellViewset(viewsets.ViewSet):
     @action(detail=False, methods=['post'])
     def populate_spells(self, request, pk=None):
         try:
-            populate_spell_data('Spell-Lists.xls')
+            spell_lists = request.FILES['SpellList']
+            populate_spell_data(spell_lists)
             return Response({'Upload Successful'})
         except FileNotFoundError:
             return Response({
