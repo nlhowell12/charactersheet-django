@@ -4,11 +4,28 @@ from rest_framework.decorators import action
 
 from .utils import generate_feats
 from characters.models import (
-    Character
+    Character, BaseClass
     )
 from .serializers import (
     CharacterSerializer
     )
+
+
+def serve_classes(data):
+    classes = {}
+    for base_class in data:
+        classes[base_class.class_name] = {
+            'hit_die': base_class.hit_die,
+            'base_attack_bonus': base_class.base_attack_bonus,
+            'skill_points': base_class.skill_points,
+            'class_abilities': base_class.class_abilities,
+            'fort': base_class.fort,
+            'reflex': base_class.reflex,
+            'will': base_class.will,
+            'spells_per_level': base_class.spells_per_level,
+            'spells_known': base_class.spells_known
+        }
+    return classes
 
 
 class CharacterViewSet(viewsets.ModelViewSet):
@@ -26,3 +43,8 @@ class CharacterViewSet(viewsets.ModelViewSet):
                 'error': 'File Not Found',
                 'status': False
             })
+
+    @action(detail=False, methods=['get', 'post'])
+    def classes(self, request, pk=None):
+        all_classes = BaseClass.objects.all()
+        return Response(serve_classes(all_classes))

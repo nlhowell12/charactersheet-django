@@ -55,9 +55,9 @@ class Character(models.Model):
     ideals = models.TextField(null=False, blank=True, default='')
     flaws = models.TextField(null=False, blank=True, default='')
     notes = models.TextField(null=False, blank=True, default='')
-    sex = models.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(3)],
-        choices=SEX_CHOICES, default=0, null=False, blank=False)
+    sex = models.CharField(
+        max_length=10,
+        choices=SEX_CHOICES, default='Male', null=False, blank=False)
     alignment = models.CharField(
         choices=ALIGNMENT_CHOICES, default='LG', null=False, blank=False,
         max_length=2)
@@ -106,12 +106,16 @@ class BaseClass(models.Model):
 
     class_name = models.CharField(max_length=20)
     hit_die = models.IntegerField(choices=HIT_DIE_CHOICES, default=4)
-    class_skills = models.ManyToManyField(
-        'Skill', related_name='+', blank=True)
+    base_attack_bonus = models.CharField(
+        max_length=1000,
+        choices=[('Poor', 'Poor'), ('Moderate', 'Moderate'), ('Good', 'Good')],
+        default='Poor')
+    class_skills = models.CharField(
+        max_length=1000, blank=True)
     skill_points = models.IntegerField(
         validators=[MinValueValidator(2)], default=2)
-    class_abilities = models.ManyToManyField(
-        'ClassAbility', blank=True)
+    class_abilities = models.CharField(
+        max_length=1000, blank=True)
     fort = models.CharField(
         max_length=4, choices=SAVE_CHOICES, default='Poor'
         )
@@ -121,20 +125,16 @@ class BaseClass(models.Model):
     will = models.CharField(
         max_length=4, choices=SAVE_CHOICES, default='Poor'
         )
+    spells_per_level = models.CharField(
+        max_length=1000, null=True, blank=True)
+    spells_known = models.IntegerField(
+        validators=[MinValueValidator(0)],
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.class_name
-
-
-class ClassAbility(models.Model):
-    class Meta:
-        verbose_name_plural = 'Class Abilities'
-
-    name = models.CharField(max_length=50, blank=True)
-    description = models.TextField(max_length=1000)
-
-    def __str__(self):
-        return self.name
 
 
 class CharacterClass(models.Model):
