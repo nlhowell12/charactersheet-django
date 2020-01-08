@@ -168,6 +168,8 @@ def populate_spell_data(file):
 
 def parse_spell(spell, class_name):
     return {
+            spell_descriptor(class_name): getattr(
+                spell, spell_descriptor(class_name)),
             'name': spell.name,
             'level': spell.level,
             'descriptors': spell.descriptors,
@@ -184,7 +186,7 @@ def parse_spell(spell, class_name):
 def get_spell_data():
     data = [
         ('Bard', Song.objects.all()),
-        ('Wizard', Wizard.objects.all()),
+        ('Sorcerer - Wizard', Wizard.objects.all()),
         ('Hexblade', Hexblade.objects.all()),
         ('Cleric', Prayer.objects.all()),
         ('Druid', Chant.objects.all()),
