@@ -165,7 +165,7 @@ class Mystery(models.Model):
     description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return f'{self.mystery_rank} - {self.path_level}. {self.name}'
+        return f'{self.mystery_rank} - {self.path}. {self.name}'
 
 
 class Epic(Spell):

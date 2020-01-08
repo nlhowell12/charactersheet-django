@@ -116,11 +116,11 @@ def populate_spell_data(file):
                         description=row[10].value
                     )
             elif sheet.name == 'Binder':
-                if row[0].ctype == 1:
+                if row[0].ctype == 2:
                     Vestige.objects.create(
                         name=row[1].value,
                         ruling_star=row[2].value,
-                        sumonning_req=row[3].value,
+                        summoning_req=row[3].value,
                         binding_DC=row[4].value,
                         strength=row[5].value,
                         tenacity=row[6].value,
@@ -151,7 +151,7 @@ def populate_spell_data(file):
                         invocation_save=row[5].value,
                         description=row[6].value
                     )
-            elif sheet.name == 'Pact Invocation':
+            elif sheet.name == 'Pact Invocations':
                 if row[0].ctype == 1:
                     PactInvocation.objects.create(
                         grade=row[0].value,
