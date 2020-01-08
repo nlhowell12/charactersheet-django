@@ -144,7 +144,7 @@ class Invocation(models.Model):
     description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return f'{self.pact} - {self.grade} - {self.name}'
+        return f'{self.grade} - {self.name}'
 
 
 class PactInvocation(Invocation):

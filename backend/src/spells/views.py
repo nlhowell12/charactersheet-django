@@ -21,11 +21,11 @@ class SpellViewset(viewsets.ViewSet):
                 'status': False,
                 'error': 'File Not Found'
             })
-        # except TypeError:
-        #     return Response({
-        #         'status': False,
-        #         'error': 'Database write error'
-        #     })
+        except TypeError:
+            return Response({
+                'status': False,
+                'error': 'Database write error'
+            })
         except KeyError:
             return Response({
                 'status': False,
@@ -34,5 +34,4 @@ class SpellViewset(viewsets.ViewSet):
 
     @action(detail=False, methods=['get'])
     def get_spells(self, request, pk=None):
-        get_spell_data()
-        return Response({'got the spells'})
+        return Response(get_spell_data())

@@ -166,24 +166,42 @@ def populate_spell_data(file):
         print(sheet.name, "- Complete")
 
 
+def parse_spell(spell, class_name):
+    return {
+            'name': spell.name,
+            'level': spell.level,
+            'descriptors': spell.descriptors,
+            'casting_time': spell.casting_time,
+            'spell_range': spell.spell_range,
+            'duration': spell.duration,
+            'spell_save': spell.spell_save,
+            'bonus_type': spell.bonus_type,
+            'damage_type': spell.damage_type,
+            'description': spell.description
+        }
+
+
 def get_spell_data():
     data = [
-        ('songs', Song.objects.all()),
-        ('sorc_wiz', Wizard.objects.all()),
-        ('hexblade', Hexblade.objects.all()),
-        ('prayers', Prayer.objects.all()),
-        ('chants', Chant.objects.all()),
-        ('psion', Psion.objects.all()),
-        ('psychic_warrior', PsychicWarrior.objects.all()),
-        ('discipline', DisciplinePower.objects.all()),
-        ('vestiges', Vestige.objects.all()),
-        ('martial_maneuvers', MartialManeuver.objects.all()),
+        ('Bard', Song.objects.all()),
+        ('Wizard', Wizard.objects.all()),
+        ('Hexblade', Hexblade.objects.all()),
+        ('Cleric', Prayer.objects.all()),
+        ('Druid', Chant.objects.all()),
+        ('Psion', Psion.objects.all()),
+        ('Psychic Warrior', PsychicWarrior.objects.all()),
+        # ('discipline', DisciplinePower.objects.all()),
+        # ('vestiges', Vestige.objects.all()),
+        # ('martial_maneuvers', MartialManeuver.objects.all()),
         # ('invocations', Invocation.objects.all()),
         # ('pact_invocations', PactInvocation.objects.all()),
-        ('mysteries', Mystery.objects.all()),
-        ('oathsworn', Oathsworn.objects.all())
+        # ('mysteries', Mystery.objects.all()),
+        ('Oathsworn', Oathsworn.objects.all())
     ]
-    print(data)
-    parsed_spells = {}
-
+    parsed_spells = {
+        spell_list[0]: [
+            parse_spell(spell, spell_list[0]) for spell in spell_list[1]
+            ]
+        for spell_list in data
+    }
     return parsed_spells
