@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from spells.utils import populate_spell_data
+from spells.utils import populate_spell_data, get_spell_data
 
 
 class SpellViewset(viewsets.ViewSet):
@@ -31,3 +31,8 @@ class SpellViewset(viewsets.ViewSet):
                 'status': False,
                 'error': 'KeyError, check dict'
             })
+
+    @action(detail=False, methods=['get'])
+    def get_spells(self, request, pk=None):
+        get_spell_data()
+        return Response({'got the spells'})

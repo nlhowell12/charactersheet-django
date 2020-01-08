@@ -164,3 +164,26 @@ def populate_spell_data(file):
                         description=row[7].value,
                     )
         print(sheet.name, "- Complete")
+
+
+def get_spell_data():
+    data = [
+        ('songs', Song.objects.all()),
+        ('sorc_wiz', Wizard.objects.all()),
+        ('hexblade', Hexblade.objects.all()),
+        ('prayers', Prayer.objects.all()),
+        ('chants', Chant.objects.all()),
+        ('psion', Psion.objects.all()),
+        ('psychic_warrior', PsychicWarrior.objects.all()),
+        ('discipline', DisciplinePower.objects.all()),
+        ('vestiges', Vestige.objects.all()),
+        ('martial_maneuvers', MartialManeuver.objects.all()),
+        # ('invocations', Invocation.objects.all()),
+        # ('pact_invocations', PactInvocation.objects.all()),
+        ('mysteries', Mystery.objects.all()),
+        ('oathsworn', Oathsworn.objects.all())
+    ]
+    print(data)
+    parsed_spells = {}
+
+    return parsed_spells

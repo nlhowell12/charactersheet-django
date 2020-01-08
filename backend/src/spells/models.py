@@ -31,44 +31,76 @@ class Spell(models.Model):
 
 
 class Song(Spell):
+    class Meta:
+        ordering = ['level', 'name']
     chord = models.CharField(max_length=20)
 
 
 class Wizard(Spell):
+    class Meta:
+        verbose_name_plural = 'Sorcerer - Wizard Spells'
+        ordering = ['level', 'name']
+
     school = models.CharField(max_length=20)
 
 
 class Hexblade(Spell):
+    class Meta:
+        verbose_name_plural = 'Hexblade Spells'
+        ordering = ['level', 'name']
+        
     school = models.CharField(max_length=20)
 
 
 class Prayer(Spell):
+    class Meta:
+        verbose_name_plural = 'Cleric Prayers'
+        ordering = ['level', 'name']
     domain = models.CharField(max_length=20)
 
 
 class Chant(Spell):
+    class Meta:
+        verbose_name_plural = 'Druid Chants'
+        ordering = ['level', 'name']
     sphere = models.CharField(max_length=20)
 
 
 class Oathsworn(Spell):
+    class Meta:
+        verbose_name_plural = 'Oathsworn Prayers'
+        ordering = ['level', 'name']
     domain = models.CharField(max_length=20)
 
 
 class Psion(Spell):
+    class Meta:
+        verbose_name_plural = 'Psion Powers'
+        ordering = ['level', 'name']
     discipline = models.CharField(max_length=20)
 
 
 class PsychicWarrior(Spell):
+    class Meta:
+        verbose_name_plural = 'Psychic Warrior Powers'
+        ordering = ['level', 'name']
     discipline = models.CharField(max_length=20)
 
 
 class DisciplinePower(Psion):
+    class Meta:
+        verbose_name_plural = 'Discipline List Powers'
+        ordering = ['discipline_list', 'level', 'name']
     discipline_list = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f'{self.discipline_list} - {self.level} - {self.name}'
 
 
 class Vestige(models.Model):
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'Binder Vestiges'
 
     name = models.CharField(max_length=50)
     ruling_star = models.CharField(max_length=50)
