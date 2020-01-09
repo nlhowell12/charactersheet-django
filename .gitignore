@@ -44,4 +44,4 @@ env.bak/
 venv.bak/
 
 #Excel Files
-.xls
+*.xls
