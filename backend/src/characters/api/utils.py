@@ -21,3 +21,20 @@ def generate_feats(feat_file):
 
 def delete_feats():
     return Feat.objects.all().delete()
+
+
+def serve_feats():
+    feats = Feat.objects.all()
+    parsed_feats = {}
+    for feat in feats:
+        parsed_feat = {
+            'feat_name': feat.feat_name,
+            'prerequisites': feat.prerequisites,
+            'benefit': feat.benefit
+        }
+        if feat.feat_classification in parsed_feats:
+            parsed_feats[feat.feat_classification] = [
+                *parsed_feats[feat.feat_classification], parsed_feat]
+        else:
+            parsed_feats[feat.feat_classification] = [parsed_feat]
+    return parsed_feats

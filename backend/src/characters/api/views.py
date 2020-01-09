@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from .utils import generate_feats
+from .utils import generate_feats, serve_feats
 from characters.models import (
     Character, BaseClass
     )
@@ -48,3 +48,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
     def classes(self, request, pk=None):
         all_classes = BaseClass.objects.all()
         return Response(serve_classes(all_classes))
+
+    @action(detail=False, methods=['get'])
+    def get_feats(self, request, pk=None):
+        return Response(serve_feats())

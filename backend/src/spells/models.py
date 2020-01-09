@@ -48,7 +48,7 @@ class Hexblade(Spell):
     class Meta:
         verbose_name_plural = 'Hexblade Spells'
         ordering = ['level', 'name']
-        
+
     school = models.CharField(max_length=20)
 
 
