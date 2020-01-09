@@ -183,6 +183,84 @@ def parse_spell(spell, class_name):
         }
 
 
+def parse_discipline_powers(spell_list):
+    return [{
+        'discipline_list': spell.discipline_list,
+        'name': spell.name,
+        'level': spell.level,
+        'descriptors': spell.descriptors,
+        'casting_time': spell.casting_time,
+        'spell_range': spell.spell_range,
+        'duration': spell.duration,
+        'spell_save': spell.spell_save,
+        'bonus_type': spell.bonus_type,
+        'damage_type': spell.damage_type,
+        'description': spell.description
+    } for spell in spell_list]
+
+
+def parse_vestiges(spell_list):
+    return [{
+        'name': spell.name,
+        'ruling_star': spell.ruling_star,
+        'summoning_req': spell.summoning_req,
+        'binding_DC': spell.binding_DC,
+        'strength': spell.strength,
+        'tenacity': spell.tenacity,
+        'force': spell.force,
+        'intellect': spell.intellect,
+        'will': spell.will,
+        'cunning': spell.cunning
+    } for spell in spell_list]
+
+
+def parse_martial_maneuvers(spell_list):
+    return [{
+        'name': spell.name,
+        'style': spell.style,
+        'level': spell.level,
+        'maneuver_type': spell.maneuver_type,
+        'description': spell.description
+    } for spell in spell_list]
+
+
+def parse_invocations(spell_list):
+    return [{
+        'grade': spell.grade,
+        'name': spell.name,
+        'level_equivalent': spell.level_equivalent,
+        'invocation_type': spell.invocation_type,
+        'duration': spell.duration,
+        'invocation_save': spell.invocation_save,
+        'description': spell.description
+    } for spell in spell_list]
+
+
+def parse_pact_invocations(spell_list):
+    return [{
+        'grade': spell.grade,
+        'pact': spell.pact,
+        'name': spell.name,
+        'level_equivalent': spell.level_equivalent,
+        'invocation_type': spell.invocation_type,
+        'duration': spell.duration,
+        'invocation_save': spell.invocation_save,
+        'description': spell.description,
+    } for spell in spell_list]
+
+
+def parse_mysteries(spell_list):
+    return [{
+        'name': spell.name,
+        'mystery_rank': spell.mystery_rank,
+        'path': spell.path,
+        'mystery_range': spell.mystery_range,
+        'duration': spell.duration,
+        'mystery_save': spell.mystery_save,
+        'description': spell.description
+    } for spell in spell_list]
+
+
 def get_spell_data():
     data = [
         ('Bard', Song.objects.all()),
@@ -192,11 +270,6 @@ def get_spell_data():
         ('Druid', Chant.objects.all()),
         ('Psion', Psion.objects.all()),
         ('Psychic Warrior', PsychicWarrior.objects.all()),
-        # ('discipline', DisciplinePower.objects.all()),
-        # ('vestiges', Vestige.objects.all()),
-        # ('martial_maneuvers', MartialManeuver.objects.all()),
-        # ('invocations', Invocation.objects.all()),
-        # ('pact_invocations', PactInvocation.objects.all()),
         # ('mysteries', Mystery.objects.all()),
         ('Oathsworn', Oathsworn.objects.all())
     ]
@@ -206,4 +279,15 @@ def get_spell_data():
             ]
         for spell_list in data
     }
+    parsed_spells['Discipline Powers'] = parse_discipline_powers(
+        DisciplinePower.objects.all())
+    parsed_spells['Vestiges'] = parse_vestiges(Vestige.objects.all())
+    parsed_spells['Martial Maneuvers'] = parse_martial_maneuvers(
+        MartialManeuver.objects.all())
+    parsed_spells['Invocations'] = parse_invocations(
+        Invocation.objects.all())
+    parsed_spells['Pact Invocations'] = parse_pact_invocations(
+        PactInvocation.objects.all())
+    parsed_spells['Mysteries'] = parse_mysteries(
+        Mystery.objects.all())
     return parsed_spells
