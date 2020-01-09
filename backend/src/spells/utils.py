@@ -270,7 +270,6 @@ def get_spell_data():
         ('Druid', Chant.objects.all()),
         ('Psion', Psion.objects.all()),
         ('Psychic Warrior', PsychicWarrior.objects.all()),
-        # ('mysteries', Mystery.objects.all()),
         ('Oathsworn', Oathsworn.objects.all())
     ]
     parsed_spells = {
