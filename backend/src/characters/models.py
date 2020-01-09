@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from characters.character_choices import (
-    ALIGNMENT_CHOICES, SEX_CHOICES, ZODIAC_CHOICES)
+    ALIGNMENT_CHOICES, SEX_CHOICES, ZODIAC_CHOICES,
+    DEFAULT_SKILLS)
 from characters.class_choices import (
     HIT_DIE_CHOICES, SAVE_CHOICES
     )
@@ -13,12 +14,14 @@ class Character(models.Model):
         User, on_delete=models.SET_NULL, null=True, related_name='player')
     DM = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name='DM')
-    character_Name = models.CharField(max_length=50)
+    character_name = models.CharField(max_length=50)
     race = models.ForeignKey('Race', on_delete=models.SET_NULL, null=True)
-    character_Classes = models.ManyToManyField(
+    subrace = models.ForeignKey(
+        'Subrace', on_delete=models.SET_NULL, null=True)
+    character_classes = models.ManyToManyField(
         'CharacterClass', related_name='character_class')
-    hair_Color = models.CharField(max_length=16, null=True, blank=True)
-    eye_Color = models.CharField(max_length=16, null=True, blank=True)
+    hair_color = models.CharField(max_length=16, null=True, blank=True)
+    eye_color = models.CharField(max_length=16, null=True, blank=True)
     height = models.CharField(
         max_length=6, null=True, blank=True,
         help_text='Height typically in feet')
@@ -28,30 +31,30 @@ class Character(models.Model):
     age = models.IntegerField(
         validators=[MinValueValidator(1)],
         null=False, blank=True, default=25)
-    max_HP = models.IntegerField(
+    max_hp = models.IntegerField(
         validators=[MinValueValidator(1)],
         null=False, blank=False, default=1)
-    current_HP = models.IntegerField(
+    current_hp = models.IntegerField(
         null=False, blank=False, default=1)
-    base_Strength = models.IntegerField(
+    base_strength = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         null=False, blank=False, default=10)
-    base_Dexterity = models.IntegerField(
+    base_dexterity = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         null=False, blank=False, default=10)
-    base_Constitution = models.IntegerField(
+    base_constitution = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         null=False, blank=False, default=10)
-    base_Intelligence = models.IntegerField(
+    base_intelligence = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         null=False, blank=False, default=10)
-    base_Wisdom = models.IntegerField(
+    base_wisdom = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         null=False, blank=False, default=10)
-    base_Charisma = models.IntegerField(
+    base_charisma = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
         null=False, blank=False, default=10)
-    personal_Traits = models.TextField(null=False, blank=True, default='')
+    personal_traits = models.TextField(null=False, blank=True, default='')
     ideals = models.TextField(null=False, blank=True, default='')
     flaws = models.TextField(null=False, blank=True, default='')
     notes = models.TextField(null=False, blank=True, default='')
@@ -61,16 +64,16 @@ class Character(models.Model):
     alignment = models.CharField(
         choices=ALIGNMENT_CHOICES, default='LG', null=False, blank=False,
         max_length=2)
-    zodiac_Sign = models.CharField(
+    zodiac_sign = models.CharField(
         choices=ZODIAC_CHOICES, default=0, null=False, blank=False,
         max_length=20)
-    skills = models.ManyToManyField(
-        'CharacterSkill', related_name='+', blank=True)
+    skills = models.CharField(
+        max_length=1000, default=DEFAULT_SKILLS)
     feats = models.ManyToManyField(
         'Feat', related_name='+', blank=True)
 
     def __str__(self):
-        return self.character_Name
+        return f'{self.character_name}'
 
 
 class Race(models.Model):
@@ -146,24 +149,7 @@ class CharacterClass(models.Model):
     level = models.IntegerField(validators=[MinValueValidator(1)])
 
     def __str__(self):
-        return '{} {}'.format(self.base_class.class_name, self.level)
-
-
-class Skill(models.Model):
-    skill_name = models.CharField(max_length=50)
-    synergies = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(max_length=1500)
-
-    def __str__(self):
-        return self.skill_name
-
-
-class CharacterSkill(models.Model):
-    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
-    rank = models.IntegerField(validators=[MinValueValidator(0)])
-
-    def __str__(self):
-        return self.skill.skill_name
+        return f'{self.base_class} {self.level}'
 
 
 class Feat(models.Model):
@@ -177,4 +163,4 @@ class Feat(models.Model):
     skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return '{} - {}'.format(self.feat_classification, self.feat_name)
+        return f'{self.feat_classification} - {self.feat_name}'

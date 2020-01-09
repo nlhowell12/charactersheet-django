@@ -2,7 +2,9 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from .utils import generate_feats, serve_feats
+from .utils import (
+    generate_feats, serve_feats, add_new_character
+    )
 from characters.models import (
     Character, BaseClass
     )
@@ -52,3 +54,9 @@ class CharacterViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def get_feats(self, request, pk=None):
         return Response(serve_feats())
+
+    @action(detail=False, methods=['put'])
+    def add_character(self, request, pk=None):
+        character = request.data
+        add_new_character(character)
+        return Response('Character Added')

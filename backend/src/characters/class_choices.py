@@ -10,3 +10,4 @@ SAVE_CHOICES = (
     ('Good', 'Good'),
     ('Poor', 'Poor')
     )
+

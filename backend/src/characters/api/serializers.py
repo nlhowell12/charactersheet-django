@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from characters.models import (
     Character, Race, Subrace, BaseClass,
-    Skill, Feat
+    Feat
     )
 from equipment.models import (
     Equipment
@@ -48,14 +48,6 @@ class BaseClassSerializer(serializers.ModelSerializer):
         fields = [
             'hit_die', 'class_skills', 'skill_points',
             'class_abilities', 'fort', 'reflex', 'will'
-        ]
-
-
-class SkillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Skill
-        fields = [
-            'skill_name', 'synergies', 'description',
         ]
 
 
