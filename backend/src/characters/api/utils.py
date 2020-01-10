@@ -1,6 +1,6 @@
 from characters.models import (
     Feat, Character, CharacterClass,
-    Race, BaseClass
+    Race, BaseClass, Subrace
     )
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -70,34 +70,39 @@ def set_character_feats(character, character_feats):
 
 
 def add_new_character(character):
-    new_character = Character.objects.create(
-        player=User.objects.filter(username=character['player']).first(),
-        DM=User.objects.filter(username=character['DM']).first(),
-        character_name=character['character_name'],
-        race=Race.objects.filter(racial_name=character['race']).first(),
-        subrace=Race.objects.filter(racial_name=character['subrace']).first(),
-        hair_color=character['hair_color'],
-        eye_color=character['eye_color'],
-        height=character['height'],
-        weight=character['weight'],
-        age=character['age'],
-        max_hp=character['max_hp'],
-        current_hp=character['current_hp'],
-        base_strength=character['base_strength'],
-        base_dexterity=character['base_dexterity'],
-        base_constitution=character['base_constitution'],
-        base_intelligence=character['base_intelligence'],
-        base_wisdom=character['base_wisdom'],
-        base_charisma=character['base_charisma'],
-        personal_traits=character['personal_traits'],
-        ideals=character['ideals'],
-        flaws=character['flaws'],
-        notes=character['notes'],
-        sex=character['sex'],
-        alignment=character['alignment'],
-        zodiac_sign=character['zodiac_sign'],
-        skills=character['skills'],
-    )
-    set_character_classes(new_character, character['character_classes'])
-    set_character_feats(new_character, character['feats'])
-    return
+    if not Character.objects.filter(character_name=character['character_name']).first():
+        new_character = Character.objects.create(
+            player=User.objects.filter(username=character['player']).first(),
+            DM=User.objects.filter(username=character['DM']).first(),
+            character_name=character['character_name'],
+            race=Race.objects.filter(
+                racial_name=character['race']).first(),
+            subrace=Subrace.objects.filter(
+                subrace_name=character['subrace']).first(),
+            hair_color=character['hair_color'],
+            eye_color=character['eye_color'],
+            height=character['height'],
+            weight=character['weight'],
+            age=character['age'],
+            max_hp=character['max_hp'],
+            current_hp=character['current_hp'],
+            base_strength=character['base_strength'],
+            base_dexterity=character['base_dexterity'],
+            base_constitution=character['base_constitution'],
+            base_intelligence=character['base_intelligence'],
+            base_wisdom=character['base_wisdom'],
+            base_charisma=character['base_charisma'],
+            personal_traits=character['personal_traits'],
+            ideals=character['ideals'],
+            flaws=character['flaws'],
+            notes=character['notes'],
+            sex=character['sex'],
+            alignment=character['alignment'],
+            zodiac_sign=character['zodiac_sign'],
+            skills=character['skills'],
+        )
+        set_character_classes(new_character, character['character_classes'])
+        set_character_feats(new_character, character['feats'])
+        return {'message': 'Character added successfully', 'status': True}
+    else:
+        return {'message': 'Character already exists', 'status': False}

@@ -58,5 +58,11 @@ class CharacterViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['put'])
     def add_character(self, request, pk=None):
         character = request.data
-        add_new_character(character)
-        return Response('Character Added')
+        response = add_new_character(character)
+        return Response(response)
+
+    @action(detail=False, methods=['get'])
+    def get_character(self, request, pk=None):
+        character_name = request.GET.get(key='name')
+        character = Character.objects.get(character_name=character_name)
+        return Response(CharacterSerializer(character).data)

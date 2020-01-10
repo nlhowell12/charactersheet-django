@@ -2,26 +2,18 @@ from rest_framework import serializers
 
 from characters.models import (
     Character, Race, Subrace, BaseClass,
-    Feat
+    Feat, CharacterClass
     )
+from django.contrib.auth.models import User
 from equipment.models import (
     Equipment
 )
 
 
-class CharacterSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Character
-        fields = [
-            'id', 'player', 'DM', 'character_Name', 'race',
-            'character_Classes', 'hair_Color', 'eye_Color',
-            'height', 'weight', 'age',
-            'max_HP', 'current_HP', 'base_Strength', 'base_Dexterity',
-            'base_Constitution', 'base_Intelligence', 'base_Wisdom',
-            'base_Charisma', 'personal_Traits', 'ideals',
-            'flaws', 'notes', 'sex', 'alignment', 'zodiac_Sign',
-            'skills', 'feats'
-            ]
+        model = User
+        fields = ['username']
 
 
 class RaceSerializer(serializers.ModelSerializer):
@@ -29,7 +21,7 @@ class RaceSerializer(serializers.ModelSerializer):
         model = Race
         fields = [
             'racial_name', 'attribute_bonuses', 'skill_bonuses',
-            'description', 'special_abilities', 'non_playable'
+            'description', 'special_abilities', 'playable'
             ]
 
 
@@ -37,7 +29,7 @@ class SubraceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subrace
         fields = [
-            'race', 'subrace_name', 'attribute_bonuses',
+            'subrace_name', 'attribute_bonuses',
             'skill_bonuses', 'description', 'special_abilities'
         ]
 
@@ -46,9 +38,17 @@ class BaseClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = BaseClass
         fields = [
-            'hit_die', 'class_skills', 'skill_points',
+            'class_name', 'hit_die', 'class_skills', 'skill_points',
             'class_abilities', 'fort', 'reflex', 'will'
         ]
+
+
+class CharacterClassSerializer(serializers.ModelSerializer):
+    base_class = BaseClassSerializer()
+
+    class Meta:
+        model = CharacterClass
+        fields = '__all__'
 
 
 class FeatSerializer(serializers.ModelSerializer):
@@ -63,4 +63,17 @@ class FeatSerializer(serializers.ModelSerializer):
 class EquipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipment
+        fields = '__all__'
+
+
+class CharacterSerializer(serializers.ModelSerializer):
+    character_classes = CharacterClassSerializer(many=True)
+    feats = FeatSerializer(many=True)
+    player = UserSerializer()
+    DM = UserSerializer()
+    race = RaceSerializer()
+    subrace = SubraceSerializer()
+
+    class Meta:
+        model = Character
         fields = '__all__'
