@@ -44,15 +44,6 @@ def serve_feats():
     return parsed_feats
 
 
-def parse_feat(feat):
-    return {
-        'feat_classification': feat.feat_classification,
-        'feat_name': feat.feat_name,
-        'prerequisites': feat.prerequisites,
-        'benefit': feat.benefit
-        }
-
-
 def set_character_classes(character, character_classes):
     for character_class in character_classes:
         new_class = CharacterClass.objects.create(
@@ -70,7 +61,8 @@ def set_character_feats(character, character_feats):
 
 
 def add_new_character(character):
-    if not Character.objects.filter(character_name=character['character_name']).first():
+    if not Character.objects.filter(
+         character_name=character['character_name']).first():
         new_character = Character.objects.create(
             player=User.objects.filter(username=character['player']).first(),
             DM=User.objects.filter(username=character['DM']).first(),

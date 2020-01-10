@@ -76,7 +76,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
         response = [
             CharacterSerializer(character).data for character in characters]
         return Response(response)
-    
+
     @action(detail=False, methods=['get'])
     def get_campaign_characters(self, request, pk=None):
         username = request.GET.get(key='username')
