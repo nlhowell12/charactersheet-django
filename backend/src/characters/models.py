@@ -17,7 +17,7 @@ class Character(models.Model):
     character_name = models.CharField(max_length=50)
     race = models.ForeignKey('Race', on_delete=models.SET_NULL, null=True)
     subrace = models.ForeignKey(
-        'Subrace', on_delete=models.SET_NULL, null=True)
+        'Subrace', on_delete=models.SET_NULL, null=True, blank=True)
     character_classes = models.ManyToManyField(
         'CharacterClass', related_name='character_class')
     hair_color = models.CharField(max_length=16, null=True, blank=True)
