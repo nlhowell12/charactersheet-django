@@ -78,8 +78,14 @@ class Character(models.Model):
 
 class Race(models.Model):
     racial_name = models.CharField(max_length=15)
+    classification = models.CharField(max_length=100, default='Humanoid')
     attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
-    skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
+    skill_bonuses = models.CharField(max_length=100, blank=True, null=True)
+    size = models.CharField(max_length=25, default='Medium')
+    speed = models.CharField(max_length=10, default='30 ft')
+    favored_class = models.CharField(max_length=50, default='Any')
+    automatic_languages = models.CharField(max_length=100, blank=True)
+    bonus_languages = models.CharField(max_length=100, blank=True)
     description = models.TextField()
     special_abilities = models.TextField()
     playable = models.BooleanField(default=True)
