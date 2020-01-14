@@ -7,12 +7,14 @@ from equipment.views import (
 from spells.views import (
     SpellViewset
 )
+from users.views import UserViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'characters', CharacterViewSet, basename='characters')
 router.register(r'equipment', EquipmentViewset, basename='equipment')
 router.register(r'spells', SpellViewset, basename='spells')
+router.register(r'users', UserViewSet, basename='users')
 urlpatterns = router.urls
 
 # from django.urls import path

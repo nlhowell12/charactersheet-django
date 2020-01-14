@@ -4,13 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-flake8 = "*"
 
 [packages]
-django = "*"
-xlrd = "*"
-django-cors-headers = "*"
-djangorestframework-jwt = "*"
+djandjangorestframework-jwt = "*"
 
 [requires]
 python_version = "3.8"
