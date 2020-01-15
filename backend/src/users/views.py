@@ -17,13 +17,15 @@ class UserViewSet(viewsets.ModelViewSet):
         try:
             if user.check_password(data['password']):
                 characters = Character.objects.filter(player=user)
-                print(characters)
                 return Response({
                     'status': True,
-                    'characters': [
-                        CharacterSerializer(
-                            character).data for character in characters]
-                })
+                    'user': {
+                        'username': user.username,
+                        'characters': [
+                            CharacterSerializer(
+                                character).data for character in characters]
+                    }
+                    })
             else:
                 return Response({
                     'status': False,
