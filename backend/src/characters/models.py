@@ -71,6 +71,7 @@ class Character(models.Model):
         max_length=1000, default=DEFAULT_SKILLS)
     feats = models.ManyToManyField(
         'Feat', related_name='+', blank=True)
+    img = models.CharField(max_length=1000, blank=True, null=True)
 
     def __str__(self):
         return f'{self.character_name}'
