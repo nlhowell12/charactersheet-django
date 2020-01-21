@@ -6,11 +6,11 @@ from .utils import (
     generate_feats, serve_feats, add_new_character
     )
 from characters.models import (
-    Character, BaseClass
+    Character, BaseClass, Race, Subrace
     )
 from django.contrib.auth.models import User
 from .serializers import (
-    CharacterSerializer
+    CharacterSerializer, RaceSerializer, SubraceSerializer
     )
 
 
@@ -84,4 +84,15 @@ class CharacterViewSet(viewsets.ModelViewSet):
         characters = Character.objects.filter(DM=DM)
         response = [
             CharacterSerializer(character).data for character in characters]
+        return Response(response)
+
+    @action(detail=False, methods=['get'])
+    def get_races(self, request, pk=None):
+        races = Race.objects.all()
+        subraces = Subrace.objects.all()
+        response = {
+            'races': [RaceSerializer(race).data for race in races],
+            'subraces': [
+                SubraceSerializer(subrace).data for subrace in subraces]
+        }
         return Response(response)
