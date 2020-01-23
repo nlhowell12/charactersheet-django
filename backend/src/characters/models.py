@@ -80,7 +80,7 @@ class Character(models.Model):
 class Race(models.Model):
     racial_name = models.CharField(max_length=15)
     classification = models.CharField(max_length=100, default='Humanoid')
-    attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
+    attribute_bonuses = models.CharField(max_length=100, blank=True, null=True)
     skill_bonuses = models.CharField(max_length=100, blank=True, null=True)
     size = models.CharField(max_length=25, default='Medium')
     speed = models.CharField(max_length=10, default='30 ft')
@@ -136,7 +136,7 @@ class BaseClass(models.Model):
         max_length=4, choices=SAVE_CHOICES, default='Poor'
         )
     spells_per_level = models.CharField(
-        max_length=1000, null=True, blank=True)
+        max_length=1500, null=True, blank=True)
     spells_known = models.IntegerField(
         validators=[MinValueValidator(0)],
         null=True,

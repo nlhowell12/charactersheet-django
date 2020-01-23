@@ -47,8 +47,8 @@ class CharacterViewSet(viewsets.ModelViewSet):
                 'status': False
             })
 
-    @action(detail=False, methods=['get', 'post'])
-    def classes(self, request, pk=None):
+    @action(detail=False, methods=['get'])
+    def get_classes(self, request, pk=None):
         all_classes = BaseClass.objects.all()
         return Response(serve_classes(all_classes))
 
