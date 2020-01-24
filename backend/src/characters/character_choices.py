@@ -41,40 +41,113 @@ ATTRIBUTE_CHOICES = (
 )
 
 DEFAULT_SKILLS = {
-    'Acrobatics': 0,
-    'Artifice': 0,
-    'Autohypnosis': 0,
-    'Bluff': 0,
-    'Climb': 0,
-    'Concentration': 0,
-    'Craft': 0,
-    'Decipher Script': 0,
-    'Diplomacy': 0,
-    'Disguise': 0,
-    'Escape Artist': 0,
-    'Forgery': 0,
-    'Handle Animal': 0,
-    'Heal': 0,
-    'Intimidate': 0,
-    'Knowledge: Arcana': 0,
-    'Knowledge: Architecture and Engineering': 0,
-    'Knowledge: Dungeoneering': 0,
-    'Knowledge: History': 0,
-    'Knowledge: Local': 0,
-    'Knowledge: Military and Tactics': 0,
-    'Knowledge: Nature': 0,
-    'Knowledge: Nobility and Royalty': 0,
-    'Knowledge: Psionics': 0,
-    'Knowledge: Religion': 0,
-    'Knowledge: The Planes': 0,
-    'Magecraft': 0,
-    'Perform': 0,
-    'Ride': 0,
-    'Sense Motive': 0,
-    'Sleight of Hand': 0,
-    'Speak Language': 0,
-    'Stealth': 0,
-    'Survival': 0,
-    'Swim': 0,
-    'Use Rope': 0,
+    'Acrobatics': {
+        'ranks': 0, 'attribute': 'Dexterity',
+        'trained': True, 'armor_check': True},
+    'Artifice': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Autohypnosis': {
+        'ranks': 0, 'attribute': 'Wisdom',
+        'trained': True, 'armor_check': False},
+    'Bluff': {
+        'ranks': 0, 'attribute': 'Charisma',
+        'trained': False, 'armor_check': False},
+    'Climb': {
+        'ranks': 0, 'attribute': 'Strength',
+        'trained': False, 'armor_check': True},
+    'Concentration': {
+        'ranks': 0, 'attribute': 'Constitution',
+        'trained': False, 'armor_check': False},
+    'Craft': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': False, 'armor_check': False},
+    'Decipher Script': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Diplomacy': {
+        'ranks': 0, 'attribute': 'Charisma',
+        'trained': False, 'armor_check': False},
+    'Disguise': {
+        'ranks': 0, 'attribute': 'Charisma',
+        'trained': False, 'armor_check': False},
+    'Escape Artist': {
+        'ranks': 0, 'attribute': 'Dexterity',
+        'trained': False, 'armor_check': True},
+    'Forgery': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': False, 'armor_check': False},
+    'Handle Animal': {
+        'ranks': 0, 'attribute': 'Wisdom',
+        'trained': True, 'armor_check': False},
+    'Heal': {
+        'ranks': 0, 'attribute': 'Wisdom',
+        'trained': False, 'armor_check': False},
+    'Intimidate': {
+        'ranks': 0, 'attribute': 'Charisma',
+        'trained': False, 'armor_check': False},
+    'Knowledge: Arcana': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Architecture and Engineering': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Dungeoneering': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: History': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Local': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Military and Tactics': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Nature': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Nobility and Royalty': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Psionics': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: Religion': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Knowledge: The Planes': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Magecraft': {
+        'ranks': 0, 'attribute': 'Intelligence',
+        'trained': True, 'armor_check': False},
+    'Perception': {
+        'ranks': 0, 'attribute': 'Wisdom',
+        'trained': False, 'armor_check': False},
+    'Perform': {
+        'ranks': 0, 'attribute': 'Charisma',
+        'trained': False, 'armor_check': False},
+    'Ride': {
+        'ranks': 0, 'attribute': 'Dexterity',
+        'trained': False, 'armor_check': False},
+    'Sense Motive': {
+        'ranks': 0, 'attribute': 'Wisdom',
+        'trained': False, 'armor_check': False},
+    'Sleight of Hand': {
+        'ranks': 0, 'attribute': 'Dexterity',
+        'trained': True, 'armor_check': True},
+    'Speak Language': {'ranks': 0, 'languages': []},
+    'Stealth': {
+        'ranks': 0, 'attribute': 'Dexterity',
+        'trained': False, 'armor_check': True},
+    'Survival': {
+        'ranks': 0, 'attribute': 'Wisdom',
+        'trained': False, 'armor_check': False},
+    'Swim': {
+        'ranks': 0, 'attribute': 'Strength',
+        'trained': False, 'armor_check': True},
+    'Use Rope': {
+        'ranks': 0, 'attribute': 'Dexterity',
+        'trained': False, 'armor_check': False},
 }
