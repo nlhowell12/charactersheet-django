@@ -42,112 +42,112 @@ ATTRIBUTE_CHOICES = (
 
 DEFAULT_SKILLS = {
     'Acrobatics': {
-        'ranks': 0, 'attribute': 'Dexterity',
+        'ranks': 0, 'total': 0, 'attribute': 'Dexterity',
         'trained': True, 'armor_check': True},
     'Artifice': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Autohypnosis': {
-        'ranks': 0, 'attribute': 'Wisdom',
+        'ranks': 0, 'total': 0,  'attribute': 'Wisdom',
         'trained': True, 'armor_check': False},
     'Bluff': {
-        'ranks': 0, 'attribute': 'Charisma',
+        'ranks': 0, 'total': 0,  'attribute': 'Charisma',
         'trained': False, 'armor_check': False},
     'Climb': {
-        'ranks': 0, 'attribute': 'Strength',
+        'ranks': 0, 'total': 0,  'attribute': 'Strength',
         'trained': False, 'armor_check': True},
     'Concentration': {
-        'ranks': 0, 'attribute': 'Constitution',
+        'ranks': 0, 'total': 0,  'attribute': 'Constitution',
         'trained': False, 'armor_check': False},
     'Craft': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': False, 'armor_check': False},
     'Decipher Script': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Diplomacy': {
-        'ranks': 0, 'attribute': 'Charisma',
+        'ranks': 0, 'total': 0,  'attribute': 'Charisma',
         'trained': False, 'armor_check': False},
     'Disguise': {
-        'ranks': 0, 'attribute': 'Charisma',
+        'ranks': 0, 'total': 0,  'attribute': 'Charisma',
         'trained': False, 'armor_check': False},
     'Escape Artist': {
-        'ranks': 0, 'attribute': 'Dexterity',
+        'ranks': 0, 'total': 0,  'attribute': 'Dexterity',
         'trained': False, 'armor_check': True},
     'Forgery': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': False, 'armor_check': False},
     'Handle Animal': {
-        'ranks': 0, 'attribute': 'Wisdom',
+        'ranks': 0, 'total': 0,  'attribute': 'Wisdom',
         'trained': True, 'armor_check': False},
     'Heal': {
-        'ranks': 0, 'attribute': 'Wisdom',
+        'ranks': 0, 'total': 0,  'attribute': 'Wisdom',
         'trained': False, 'armor_check': False},
     'Intimidate': {
-        'ranks': 0, 'attribute': 'Charisma',
+        'ranks': 0, 'total': 0,  'attribute': 'Charisma',
         'trained': False, 'armor_check': False},
     'Knowledge: Arcana': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Architecture and Engineering': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Dungeoneering': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: History': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Local': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Military and Tactics': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Nature': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Nobility and Royalty': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Psionics': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: Religion': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Knowledge: The Planes': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Magecraft': {
-        'ranks': 0, 'attribute': 'Intelligence',
+        'ranks': 0, 'total': 0,  'attribute': 'Intelligence',
         'trained': True, 'armor_check': False},
     'Perception': {
-        'ranks': 0, 'attribute': 'Wisdom',
+        'ranks': 0, 'total': 0,  'attribute': 'Wisdom',
         'trained': False, 'armor_check': False},
     'Perform': {
-        'ranks': 0, 'attribute': 'Charisma',
+        'ranks': 0, 'total': 0,  'attribute': 'Charisma',
         'trained': False, 'armor_check': False},
     'Ride': {
-        'ranks': 0, 'attribute': 'Dexterity',
+        'ranks': 0, 'total': 0,  'attribute': 'Dexterity',
         'trained': False, 'armor_check': False},
     'Sense Motive': {
-        'ranks': 0, 'attribute': 'Wisdom',
+        'ranks': 0, 'total': 0,  'attribute': 'Wisdom',
         'trained': False, 'armor_check': False},
     'Sleight of Hand': {
-        'ranks': 0, 'attribute': 'Dexterity',
+        'ranks': 0, 'total': 0,  'attribute': 'Dexterity',
         'trained': True, 'armor_check': True},
     'Speak Language': {'ranks': 0, 'languages': []},
     'Stealth': {
-        'ranks': 0, 'attribute': 'Dexterity',
+        'ranks': 0, 'total': 0,  'attribute': 'Dexterity',
         'trained': False, 'armor_check': True},
     'Survival': {
-        'ranks': 0, 'attribute': 'Wisdom',
+        'ranks': 0, 'total': 0,  'attribute': 'Wisdom',
         'trained': False, 'armor_check': False},
     'Swim': {
-        'ranks': 0, 'attribute': 'Strength',
+        'ranks': 0, 'total': 0,  'attribute': 'Strength',
         'trained': False, 'armor_check': True},
     'Use Rope': {
-        'ranks': 0, 'attribute': 'Dexterity',
+        'ranks': 0, 'total': 0,  'attribute': 'Dexterity',
         'trained': False, 'armor_check': False},
 }
