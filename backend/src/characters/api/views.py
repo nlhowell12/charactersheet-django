@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from .serializers import (
     CharacterSerializer, RaceSerializer, SubraceSerializer
     )
+from characters.character_choices import DEFAULT_SKILLS
 
 
 def serve_classes(data):
@@ -96,3 +97,7 @@ class CharacterViewSet(viewsets.ModelViewSet):
                 SubraceSerializer(subrace).data for subrace in subraces]
         }
         return Response(response)
+
+    @action(detail=False, methods=['get'])
+    def get_skills(self, request, pk=None):
+        return Response(DEFAULT_SKILLS)
