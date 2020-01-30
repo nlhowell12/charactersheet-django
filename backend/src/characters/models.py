@@ -101,8 +101,8 @@ class Subrace(models.Model):
 
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
     subrace_name = models.CharField(max_length=30)
-    attribute_bonuses = models.CharField(max_length=50, blank=True, null=True)
-    skill_bonuses = models.CharField(max_length=50, blank=True, null=True)
+    attribute_bonuses = models.CharField(max_length=100, blank=True, null=True)
+    skill_bonuses = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField()
     special_abilities = models.TextField()
 

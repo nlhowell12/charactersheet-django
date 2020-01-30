@@ -26,10 +26,12 @@ class RaceSerializer(serializers.ModelSerializer):
 
 
 class SubraceSerializer(serializers.ModelSerializer):
+    race = RaceSerializer()
+
     class Meta:
         model = Subrace
         fields = [
-            'subrace_name', 'attribute_bonuses',
+            'race', 'subrace_name', 'attribute_bonuses',
             'skill_bonuses', 'description', 'special_abilities'
         ]
 
