@@ -21,7 +21,9 @@ class RaceSerializer(serializers.ModelSerializer):
         model = Race
         fields = [
             'racial_name', 'attribute_bonuses', 'skill_bonuses',
-            'description', 'special_abilities', 'playable'
+            'description', 'special_abilities', 'playable',
+            'automatic_languages', 'bonus_languages', 'feats',
+            'favored_class'
             ]
 
 
@@ -32,7 +34,9 @@ class SubraceSerializer(serializers.ModelSerializer):
         model = Subrace
         fields = [
             'race', 'subrace_name', 'attribute_bonuses',
-            'skill_bonuses', 'description', 'special_abilities'
+            'skill_bonuses', 'description', 'special_abilities',
+            'automatic_languages', 'bonus_languages', 'feats',
+            'favored_class'
         ]
 
 

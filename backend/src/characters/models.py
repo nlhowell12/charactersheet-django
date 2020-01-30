@@ -82,6 +82,7 @@ class Race(models.Model):
     classification = models.CharField(max_length=100, default='Humanoid')
     attribute_bonuses = models.CharField(max_length=100, blank=True, null=True)
     skill_bonuses = models.CharField(max_length=100, blank=True, null=True)
+    feats = models.CharField(max_length=100, blank=True, null=True)
     size = models.CharField(max_length=25, default='Medium')
     speed = models.CharField(max_length=10, default='30 ft')
     favored_class = models.CharField(max_length=50, default='Any')
@@ -103,6 +104,10 @@ class Subrace(models.Model):
     subrace_name = models.CharField(max_length=30)
     attribute_bonuses = models.CharField(max_length=100, blank=True, null=True)
     skill_bonuses = models.CharField(max_length=100, blank=True, null=True)
+    feats = models.CharField(max_length=100, blank=True, null=True)
+    favored_class = models.CharField(max_length=50, default='Any')
+    automatic_languages = models.CharField(max_length=200, blank=True)
+    bonus_languages = models.CharField(max_length=200, blank=True)
     description = models.TextField()
     special_abilities = models.TextField()
 
