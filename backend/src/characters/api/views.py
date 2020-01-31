@@ -27,7 +27,8 @@ def serve_classes(data):
             'reflex': base_class.reflex,
             'will': base_class.will,
             'spells_per_level': base_class.spells_per_level,
-            'spells_known': base_class.spells_known
+            'spells_known': base_class.spells_known,
+            'class_skills': base_class.class_skills
         }
     return classes
 
